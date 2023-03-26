@@ -2,8 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const filesRouter = require('./routes/files');
+const config = require('./config');
 const app = express();
-const port = 3000;
+const port = config.port;
 
 app.use(cors());
 

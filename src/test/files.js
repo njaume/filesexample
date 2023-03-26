@@ -4,6 +4,7 @@ process.env.NODE_ENV = "test";
 //Require the dev-dependencies
 let chai = require("chai");
 let chaiHttp = require("chai-http");
+const config = require("../config");
 let should = chai.should();
 var expect = chai.expect;
 
@@ -16,7 +17,7 @@ describe("Files", () => {
   describe("/GET files", () => {
     it("it should GET all the files", (done) => {
       chai
-        .request("http://localhost:3000")
+        .request(`http://localhost:${config.port}`)
         .get("/files/data")
         .end((err, res) => {
           console.log("body", res.body);
