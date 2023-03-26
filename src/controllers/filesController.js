@@ -9,12 +9,14 @@ const getFiles = async (req, res, next) => {
     const data = results
       .map((result) => {
         console.log(result);
-        return result.status === "fulfilled" ? result.value : null;
+        return result.status === "fulfilled" ? fileNormalizer(result.value) : null;
       })
       .filter((n) => n);
-    
+
     return res.send(data);
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).send('Error')
+  }
 };
 
 module.exports = {
