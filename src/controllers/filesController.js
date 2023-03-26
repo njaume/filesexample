@@ -8,14 +8,13 @@ const getFiles = async (req, res, next) => {
     const results = await Promise.allSettled(promises);
     const data = results
       .map((result) => {
-        console.log(result);
         return result.status === "fulfilled" ? fileNormalizer(result.value) : null;
       })
       .filter((n) => n);
-
     return res.send(data);
   } catch (error) {
-    return res.status(500).send('Error')
+    console.error(error)
+    return res.status(500).send(error)
   }
 };
 

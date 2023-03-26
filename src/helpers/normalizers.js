@@ -6,6 +6,7 @@ const fileNormalizer = (file = "") => {
     file: fArray[0],
     lines: [],
   };
+  
   for (let i = 4; i < fArray.length; i += 4) {
     const l = {
       text: fArray[i + 1],

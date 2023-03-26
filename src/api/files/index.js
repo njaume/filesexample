@@ -44,6 +44,7 @@ class ApiService {
 
   async getFiles() {
     const data = await this.api.get("/files", this.withAuthHeaders());
+    console.log('getFiled', data)
     return data?.data?.files;
   }
 
