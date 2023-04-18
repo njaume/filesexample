@@ -13,4 +13,4 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(filesRouter);
 
-app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
+app.listen(port, () => console.log(`app listening on port ${port}!`));
