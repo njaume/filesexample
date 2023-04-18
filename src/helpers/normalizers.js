@@ -1,21 +1,38 @@
+const { regexHexa32 } = require("../constants");
+
 const fileNormalizer = (file = "") => {
-  const fArray = file.split(",");
-  if (!fArray || fArray.length % 4 !== 0) return null;
+  const lines = getFileLines(file);
+  console.log("lines", lines);
+  if (!lines || lines.length < 2) return null;
   //return fArray
   const response = {
-    file: fArray[0],
+    file: "",
     lines: [],
   };
-  
-  for (let i = 4; i < fArray.length; i += 4) {
+
+  for (let i = 1; i < lines.length; i++) {
+    const fileColumns = lines[i].split(",");
+    console.log('fileColumns', fileColumns)
     const l = {
-      text: fArray[i + 1],
-      number: fArray[i + 2],
-      hex: fArray[i + 3],
+      text: fileColumns[1],
+      number: fileColumns[2],
+      hex: fileColumns[3],
     };
-    response.lines.push(l);
+    if (fileColumns.length === 4 && isHexa32(l.hex) && isNumber(l.number)) {
+      response.file = fileColumns[0];
+      response.lines.push(l);
+    }
   }
   return response;
+};
+
+const getFileLines = (file) => file.split("\n");
+const isHexa32 = (text) => {
+  return regexHexa32.test(text);
+};
+
+const isNumber = (text) => {
+  return Number(text);
 };
 
 module.exports = {
