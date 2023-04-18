@@ -2,9 +2,7 @@ const { regexHexa32 } = require("../constants");
 
 const fileNormalizer = (file = "") => {
   const lines = getFileLines(file);
-  console.log("lines", lines);
   if (!lines || lines.length < 2) return null;
-  //return fArray
   const response = {
     file: "",
     lines: [],
@@ -12,7 +10,6 @@ const fileNormalizer = (file = "") => {
 
   for (let i = 1; i < lines.length; i++) {
     const fileColumns = lines[i].split(",");
-    console.log('fileColumns', fileColumns)
     const l = {
       text: fileColumns[1],
       number: fileColumns[2],
@@ -23,7 +20,7 @@ const fileNormalizer = (file = "") => {
       response.lines.push(l);
     }
   }
-  return response;
+  return response?.lines?.length ? response : null;
 };
 
 const getFileLines = (file) => file.split("\n");
